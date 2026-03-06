@@ -1,0 +1,83 @@
+{
+  "manifest_version": "0.4",
+  "name": "postgres-mcp",
+  "version": "1.0.2",
+  "display_name": "PostgreSQL Database",
+  "description": "Connect Claude to your PostgreSQL database for querying, analysis, and schema exploration. Despite the generic warning, this extension ONLY connects to your database — it does not access your filesystem.",
+  "author": {
+    "name": "Tangible Materials"
+  },
+  "server": {
+    "type": "uv",
+    "entry_point": "server/main.py",
+    "mcp_config": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "${__dirname}",
+        "server/main.py"
+      ],
+      "env": {
+        "DATABASE_URI": "postgresql://${user_config.username}:${user_config.password}@${user_config.host}:${user_config.port}/${user_config.database}",
+        "POSTGRES_MCP_ACCESS_MODE": "${user_config.access_mode}"
+      }
+    }
+  },
+  "user_config": {
+    "host": {
+      "type": "string",
+      "title": "Database Host",
+      "description": "The hostname or IP address of your PostgreSQL server (e.g. localhost or db.example.com)",
+      "required": true,
+      "default": "localhost"
+    },
+    "port": {
+      "type": "number",
+      "title": "Database Port",
+      "description": "The port number for your PostgreSQL server",
+      "required": true,
+      "default": 5432,
+      "min": 1,
+      "max": 65535
+    },
+    "database": {
+      "type": "string",
+      "title": "Database Name",
+      "description": "The name of the database to connect to",
+      "required": true
+    },
+    "username": {
+      "type": "string",
+      "title": "Username",
+      "description": "Your PostgreSQL username",
+      "required": true
+    },
+    "password": {
+      "type": "string",
+      "title": "Password",
+      "description": "Your PostgreSQL password",
+      "required": true,
+      "sensitive": true
+    },
+    "access_mode": {
+      "type": "string",
+      "title": "Access Mode",
+      "description": "Use 'restricted' for read-only access (recommended for production), or 'unrestricted' for full read/write access",
+      "required": true,
+      "default": "restricted"
+    }
+  },
+  "tools": [
+    { "name": "list_schemas", "description": "List all database schemas" },
+    { "name": "list_tables", "description": "List all tables in a schema" },
+    { "name": "describe_table", "description": "Get column details for a table" },
+    { "name": "run_query", "description": "Execute a SQL query" },
+    { "name": "get_top_queries", "description": "Show top resource-consuming queries" },
+    { "name": "explain_query", "description": "Get the execution plan for a query" },
+    { "name": "analyze_table_indexes", "description": "Analyze index usage for a table" },
+    { "name": "suggest_indexes", "description": "Get index recommendations for a query" }
+  ],
+  "keywords": ["postgresql", "postgres", "database", "sql", "query"],
+  "license": "MIT"
+}
