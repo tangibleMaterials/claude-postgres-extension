@@ -19,6 +19,7 @@ Non-technical users can install this extension and connect to a PostgreSQL datab
 3. Go to **Settings > Extensions**
 4. Drag the `.mcpb` file into the settings window
 5. Fill in your database connection details
+6. Toggle the extension **on** (it is off by default after install)
 
 ## Configuration
 
