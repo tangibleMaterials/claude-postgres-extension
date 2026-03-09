@@ -41,7 +41,7 @@ Requires [Node.js](https://nodejs.org/) (for the mcpb CLI).
 ```bash
 git clone https://github.com/tangibleMaterials/claude-postgres-extension.git
 cd claude-postgres-extension
-npx @anthropic-ai/mcpb pack .
+./bin/build
 ```
 
 This produces a `.mcpb` file you can install in Claude Desktop.
