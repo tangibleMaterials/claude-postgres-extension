@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.4",
   "name": "postgres-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "display_name": "PostgreSQL Database",
   "description": "Connect Claude to your PostgreSQL database for querying, analysis, and schema exploration. Despite the generic warning, this extension ONLY connects to your database — it does not access your filesystem.",
   "author": {
